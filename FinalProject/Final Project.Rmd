@@ -1,0 +1,95 @@
+---
+title: Final Project 
+author: "Author: Patrick Bautista" 
+date: "'r format(Sys.time(), '%B %d, %Y @ %I:%M %p')`"
+output: ioslides_presentation
+---
+
+```{r global_options, includes = FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  comment = NA
+)
+```
+
+## Packages Used
+
+Tidyverse for data manipulation and plotting.
+
+```{r, echo = TRUE}
+library(tidyverse)
+```
+
+
+## Crytro Currency 
+
+Cryto Currency is digital currency desugned to work as exchange currency through a computer network that is not dependent on any central authority, such as government bank, which avoids any upholds or maintenance from such bank.
+
+Ethereum is a Crytro Currency that is decentralized, open-source block chain with sart contract functionality. Ethereum(Ether) is second only to Bitcoin in market capitalization.  
+
+
+## Ethereum Cryptocurrency Historical Dataset
+
+I gather my dataset from using KaggleDatasets, which is a data science company. Which allows users to explore and publish data sets, along with working with other data scientists machine learning engineers.
+
+The dataset was last updated May 1, 2022, which is revalently recent just a few days off but it has change a bit since it's Crytocurrency.
+
+**Variables in Dataset:**
+
+* `Date`: Date of the ETH prices 
+* `Open`: Opening Prices of ETH (Dollar equivalence)
+* `High`: Highest price of ETH on the respective date (Dollar equivalence) 
+* `Low`: Lowest price of ETH on the respective date (Dollar equivalence)
+* `Close`: Closing price of ETH on the respective date (Dollar equivalence)
+* `Volume`: Volume of ETH on the respective date (Dollar equivalence)
+
+
+```{r}
+data <- read_csv("Ethereum Historical Data.csv") 
+```
+
+##
+
+```{r, fig.align = "center", fig.width = 7.5}
+ggplot(data, aes(x = Open, y = Close))+ 
+  geom_point() + 
+  scale_x_discrete(labels = c("Open", "Close")) +
+  scale_y_continuous(breaks = seq(from = 0, to = 5000, by = 625), limits = c(0, 5000)) +
+  theme_minimal() + 
+  theme( 
+    axis.text.x = element_text(size = 13),
+    axis.text.y = element_text(size = 11),
+    axis.title.y = element_text(size = 15),
+    panel.grid.major.x = element_blank(),
+    legend.position = "none"
+    ) + 
+  # might need to add something here 
+  labs(
+    title = "Open & Close of Ethereum in dollars",
+    subtitle = "Data includes dates of open & close", 
+    caption = "Ethereum dollar equivalence is up to date",
+    x =NULL ,
+    y = "Amount of Dollar"
+     )
+```
+  
+  
+```{r, fig.align = "center", fig.width = 7.5}
+ggplot(data, aes(x = Low, y = High)) + 
+  geom_line(linetype = "dotted", color = "green") + 
+  geom_point()
+```
+  
+  
+```{r}
+ggplot(data, aes( y = volume))+
+  geom_bar() + 
+  labs()
+```
+  
+  
+
+  
+  
